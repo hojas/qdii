@@ -23,8 +23,8 @@ export function formatPercent(value: number | null | undefined): string {
  */
 export function changeColorClass(value: number | null | undefined): string {
   if (value == null) return 'text-[var(--color-text-muted)]';
-  if (value > 0) return 'text-[var(--color-accent-green)]';
-  if (value < 0) return 'text-[var(--color-accent-red)]';
+  if (value > 0) return 'text-[var(--color-accent-red)]';
+  if (value < 0) return 'text-[var(--color-accent-green)]';
   return 'text-[var(--color-text-secondary)]';
 }
 
