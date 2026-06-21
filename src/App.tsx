@@ -10,12 +10,6 @@ import { HeroSection } from '@/components/HeroSection';
 import { DataStatusBar } from '@/components/DataStatusBar';
 import { EtfComparisonTable } from '@/components/EtfComparisonTable';
 import { EtfCardList } from '@/components/EtfCardList';
-import { cn } from '@/utils/cn';
-
-const TABS: { key: IndexType; label: string }[] = [
-  { key: 'nasdaq-100', label: '纳斯达克100' },
-  { key: 'sp500', label: '标普500' },
-];
 
 export default function App() {
   const [activeIndex, setActiveIndex] = useState<IndexType>('nasdaq-100');
@@ -49,30 +43,8 @@ export default function App() {
   }, []);
 
   return (
-    <Layout>
+    <Layout activeIndex={activeIndex} onIndexChange={handleIndexChange}>
       <HeroSection intro={INDEX_INTRO_MAP[activeIndex]} indexType={activeIndex} />
-
-      {/* Index switcher */}
-      <nav
-        className="flex gap-1 mb-6 p-1 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-lg)] w-fit"
-        aria-label="指数选择"
-      >
-        {TABS.map((tab) => (
-          <button
-            key={tab.key}
-            type="button"
-            onClick={() => handleIndexChange(tab.key)}
-            className={cn(
-              'px-4 py-2 text-sm font-medium rounded-[var(--radius-md)] transition-colors',
-              activeIndex === tab.key
-                ? 'bg-[var(--color-accent)] text-white'
-                : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]',
-            )}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </nav>
 
       <DataStatusBar loading={loading} error={error} lastUpdated={lastUpdated} />
 
