@@ -1,4 +1,4 @@
-export const NDX_INTRO = {
+export const QDII_INTRO = {
   title: 'NASDAQ-100',
   subtitle: '纳斯达克100指数',
   description:
