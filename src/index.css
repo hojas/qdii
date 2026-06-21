@@ -3,21 +3,21 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
-/* ── Custom Design Tokens ── */
+/* ── Custom Design Tokens (aligned with shadcn dark theme) ── */
 @theme {
-  --color-bg: #08080d;
-  --color-surface: #111118;
-  --color-surface-elevated: #181820;
-  --color-border: #1e1e2a;
-  --color-border-hover: #2e2e3a;
-  --color-text-primary: #e8e6e3;
-  --color-text-secondary: #8b8b96;
-  --color-text-muted: #5c5c66;
+  --color-bg: oklch(0.145 0 0);
+  --color-surface: oklch(0.205 0 0);
+  --color-surface-elevated: oklch(0.269 0 0);
+  --color-border: oklch(1 0 0 / 10%);
+  --color-border-hover: oklch(1 0 0 / 20%);
+  --color-text-primary: oklch(0.985 0 0);
+  --color-text-secondary: oklch(0.708 0 0);
+  --color-text-muted: oklch(0.556 0 0);
   --color-accent-green: #22c55e;
-  --color-accent-red: #ef4444;
+  --color-accent-red: oklch(0.704 0.191 22.216);
   --color-accent-amber: #f59e0b;
   --color-accent-blue: #60a5fa;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Geist Variable', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --font-display: Georgia, 'Times New Roman', serif;
   --radius-sm: 4px;
@@ -28,41 +28,41 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── shadcn/ui Theme (dark-only) ── */
+/* ── shadcn/ui default dark theme ── */
 :root {
-  --background: #08080d;
-  --foreground: #e8e6e3;
-  --card: #111118;
-  --card-foreground: #e8e6e3;
-  --popover: #181820;
-  --popover-foreground: #e8e6e3;
-  --primary: #60a5fa;
-  --primary-foreground: #08080d;
-  --secondary: #181820;
-  --secondary-foreground: #e8e6e3;
-  --muted: #181820;
-  --muted-foreground: #8b8b96;
-  --accent: #181820;
-  --accent-foreground: #e8e6e3;
-  --destructive: #ef4444;
-  --destructive-foreground: #08080d;
-  --border: #1e1e2a;
-  --input: #1e1e2a;
-  --ring: #60a5fa;
-  --radius: 0.5rem;
-  --chart-1: #60a5fa;
-  --chart-2: #22c55e;
-  --chart-3: #f59e0b;
-  --chart-4: #ef4444;
-  --chart-5: #8b8b96;
-  --sidebar: #111118;
-  --sidebar-foreground: #e8e6e3;
-  --sidebar-primary: #60a5fa;
-  --sidebar-primary-foreground: #08080d;
-  --sidebar-accent: #181820;
-  --sidebar-accent-foreground: #e8e6e3;
-  --sidebar-border: #1e1e2a;
-  --sidebar-ring: #60a5fa;
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --radius: 0.625rem;
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
   --font-heading: var(--font-sans);
 }
 
