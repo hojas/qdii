@@ -1,4 +1,5 @@
 import type { ColumnDef, SortField, SortDir } from '@/types/etf';
+import { TableHeader, TableHead, TableRow } from '@/components/ui/table';
 import { cn } from '@/utils/cn';
 
 interface EtfTableHeaderProps {
@@ -10,17 +11,17 @@ interface EtfTableHeaderProps {
 
 export function EtfTableHeader({ columns, sortField, sortDir, onSort }: EtfTableHeaderProps) {
   return (
-    <thead className="sticky top-0 z-10">
-      <tr className="bg-[var(--color-surface)]">
+    <TableHeader className="sticky top-0 z-10">
+      <TableRow className="bg-[var(--color-surface)]">
         {columns.map((col) => {
           const isActive = sortField === col.field;
           const canSort = col.sortable;
 
           return (
-            <th
+            <TableHead
               key={col.field}
               className={cn(
-                'group px-4 py-3 text-xs font-medium uppercase tracking-wider select-none',
+                'group text-xs font-medium uppercase tracking-wider select-none',
                 col.align === 'right' ? 'text-right' : 'text-left',
                 canSort
                   ? 'cursor-pointer hover:text-[var(--color-accent-amber)] transition-colors duration-[var(--duration-fast)]'
@@ -45,10 +46,10 @@ export function EtfTableHeader({ columns, sortField, sortDir, onSort }: EtfTable
                   </span>
                 )}
               </span>
-            </th>
+            </TableHead>
           );
         })}
-      </tr>
-    </thead>
+      </TableRow>
+    </TableHeader>
   );
 }

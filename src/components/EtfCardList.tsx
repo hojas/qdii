@@ -1,5 +1,7 @@
 import type { EnrichedEtf, SortField, SortDir } from '@/types/etf';
 import { ETF_COLUMNS } from '@/utils/constants';
+import { Card, CardContent } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/utils/cn';
 import {
   formatPrice, formatPercent, formatFee,
@@ -17,14 +19,18 @@ interface EtfCardListProps {
 
 function SkeletonCard() {
   return (
-    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-md)] p-4 animate-pulse">
-      <div className="skeleton h-5 w-32 mb-3" />
-      <div className="grid grid-cols-2 gap-2">
+    <Card className="p-4">
+      <div className="flex items-center justify-between mb-3">
+        <Skeleton className="h-4 w-16" />
+        <Skeleton className="h-4 w-14" />
+      </div>
+      <Skeleton className="h-4 w-40 mb-3" />
+      <div className="grid grid-cols-2 gap-x-4 gap-y-2">
         {Array.from({ length: 6 }, (_, i) => (
-          <div key={i} className="skeleton h-4 w-20" />
+          <Skeleton key={i} className="h-4 w-20" />
         ))}
       </div>
-    </div>
+    </Card>
   );
 }
 
@@ -33,15 +39,12 @@ function EtfCard({ etf, index }: { etf: EnrichedEtf; index: number }) {
   const feeCls = feeColorClass(etf.managementFee);
 
   return (
-    <div
+    <Card
       className={cn(
-        'bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-md)] p-4',
-        'transition-colors duration-[var(--duration-fast)] hover:border-[var(--color-border-hover)]',
-        'animate-fade-in-up',
+        'p-4 transition-colors duration-[var(--duration-fast)] animate-fade-in-up',
       )}
       style={{ animationDelay: `${index * 60}ms` }}
     >
-      {/* Header: code + name */}
       <div className="flex items-center justify-between mb-3">
         <span className="font-mono text-sm text-[var(--color-accent-blue)]">{etf.code}</span>
         <span className={cn('text-sm font-mono font-medium tabular-nums', changeCls)}>
@@ -52,8 +55,7 @@ function EtfCard({ etf, index }: { etf: EnrichedEtf; index: number }) {
         {etf.name}
       </p>
 
-      {/* Metrics grid */}
-      <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+      <CardContent className="p-0 grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
         {([
           { label: '最新价',   value: formatPrice(etf.price),               cls: 'text-[var(--color-text-primary)]' },
           { label: '管理费率', value: formatFee(etf.managementFee),         cls: feeCls },
@@ -67,8 +69,8 @@ function EtfCard({ etf, index }: { etf: EnrichedEtf; index: number }) {
             <span className={cn('font-mono tabular-nums', m.cls)}>{m.value}</span>
           </div>
         ))}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -77,7 +79,6 @@ const SORTABLE_COLUMNS = ETF_COLUMNS.filter((c) => c.sortable);
 export function EtfCardList({ etfs, sortField, sortDir, onSort, loading }: EtfCardListProps) {
   return (
     <section aria-label="ETF Card List">
-      {/* Sort controls */}
       <div className="flex flex-wrap gap-2 mb-4">
         {SORTABLE_COLUMNS.map((col) => {
           const isActive = sortField === col.field;
@@ -100,7 +101,6 @@ export function EtfCardList({ etfs, sortField, sortDir, onSort, loading }: EtfCa
         })}
       </div>
 
-      {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {loading
           ? Array.from({ length: 6 }, (_, i) => <SkeletonCard key={i} />)

@@ -1,4 +1,5 @@
 import type { ColumnDef, EnrichedEtf } from '@/types/etf';
+import { TableCell } from '@/components/ui/table';
 import {
   formatPrice,
   formatPercent,
@@ -50,9 +51,9 @@ export function MetricCell({ column, etf }: MetricCellProps) {
   const colorCls = cellColorClass(etf, column);
 
   return (
-    <td
+    <TableCell
       className={cn(
-        'px-4 py-3 text-sm whitespace-nowrap',
+        'text-sm whitespace-nowrap',
         column.align === 'right' ? 'text-right font-mono tabular-nums' : 'text-left',
         colorCls,
         column.format === 'name' && 'max-w-[180px] truncate',
@@ -63,6 +64,6 @@ export function MetricCell({ column, etf }: MetricCellProps) {
       ) : (
         value
       )}
-    </td>
+    </TableCell>
   );
 }

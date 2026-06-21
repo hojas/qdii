@@ -1,5 +1,11 @@
 import type { EnrichedEtf, SortField, SortDir } from '@/types/etf';
 import { ETF_COLUMNS } from '@/utils/constants';
+import {
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@/components/ui/table';
 import { EtfTableHeader } from './EtfTableHeader';
 import { EtfTableRow } from './EtfTableRow';
 
@@ -13,16 +19,16 @@ interface EtfComparisonTableProps {
 
 function SkeletonRow({ index }: { index: number }) {
   return (
-    <tr style={{ animationDelay: `${index * 40}ms` }}>
+    <TableRow style={{ animationDelay: `${index * 40}ms` }}>
       {ETF_COLUMNS.map((col) => (
-        <td key={col.field} className="px-4 py-3">
+        <TableCell key={col.field}>
           <div
             className="skeleton h-4 rounded"
             style={{ width: col.format === 'name' ? '120px' : '64px' }}
           />
-        </td>
+        </TableCell>
       ))}
-    </tr>
+    </TableRow>
   );
 }
 
@@ -34,23 +40,23 @@ export function EtfComparisonTable({
   loading,
 }: EtfComparisonTableProps) {
   return (
-    <section aria-label="ETF Comparison Table" className="w-full overflow-x-auto">
+    <section aria-label="ETF Comparison Table" className="w-full">
       <div className="min-w-[900px]">
-        <table className="w-full border-collapse">
+        <Table>
           <EtfTableHeader
             columns={ETF_COLUMNS}
             sortField={sortField}
             sortDir={sortDir}
             onSort={onSort}
           />
-          <tbody>
+          <TableBody>
             {loading
               ? Array.from({ length: etfs.length || 12 }, (_, i) => <SkeletonRow key={i} index={i} />)
               : etfs.map((etf, i) => (
                   <EtfTableRow key={etf.code} etf={etf} columns={ETF_COLUMNS} index={i} />
                 ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </section>
   );

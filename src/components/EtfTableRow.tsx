@@ -1,4 +1,5 @@
 import type { EnrichedEtf, ColumnDef } from '@/types/etf';
+import { TableRow } from '@/components/ui/table';
 import { MetricCell } from './MetricCell';
 import { cn } from '@/utils/cn';
 
@@ -10,17 +11,15 @@ interface EtfTableRowProps {
 
 export function EtfTableRow({ etf, columns, index }: EtfTableRowProps) {
   return (
-    <tr
+    <TableRow
       className={cn(
-        'border-b border-[var(--color-border)] transition-transform duration-[var(--duration-fast)]',
-        'hover:scale-[1.002] hover:bg-[var(--color-surface-elevated)]',
-        'animate-fade-in-up',
+        'transition-transform duration-[var(--duration-fast)] animate-fade-in-up',
       )}
       style={{ animationDelay: `${index * 40}ms` }}
     >
       {columns.map((col) => (
         <MetricCell key={col.field} column={col} etf={etf} />
       ))}
-    </tr>
+    </TableRow>
   );
 }

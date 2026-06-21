@@ -46,7 +46,13 @@ export default function App() {
     <Layout activeIndex={activeIndex} onIndexChange={handleIndexChange}>
       <HeroSection intro={INDEX_INTRO_MAP[activeIndex]} indexType={activeIndex} />
 
-      <DataStatusBar loading={loading} error={error} lastUpdated={lastUpdated} />
+      <DataStatusBar
+        loading={loading}
+        error={error}
+        lastUpdated={lastUpdated}
+        etfCount={sortedEtfs.length}
+        indexType={activeIndex}
+      />
 
       {/* Desktop: full table */}
       <div className="hidden lg:block">
