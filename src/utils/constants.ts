@@ -1,4 +1,10 @@
-import type { ColumnDef } from '@/types/etf';
+import type { ColumnDef, IndexType } from '@/types/etf';
+
+/** Map from index type to stock-sdk US symbol */
+export const INDEX_SYMBOL_MAP: Record<IndexType, string> = {
+  'nasdaq-100': 'NDX',
+  sp500: 'INX',
+};
 
 export const ETF_COLUMNS: readonly ColumnDef[] = [
   { field: 'code', label: '代码', format: 'code', sortable: true, align: 'left' },

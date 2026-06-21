@@ -14,17 +14,25 @@ interface UseIndexQuoteResult {
   lastUpdated: number | null;
 }
 
-export function useIndexQuote(): UseIndexQuoteResult {
+export function useIndexQuote(symbol: string): UseIndexQuoteResult {
   const [data, setData] = useState<IndexQuoteData>({ price: null, changePercent: null });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<number | null>(null);
   const mountedRef = useRef(true);
+  const prevSymbolRef = useRef(symbol);
+
+  // Reset loading state when symbol changes
+  if (prevSymbolRef.current !== symbol) {
+    prevSymbolRef.current = symbol;
+    setLoading(true);
+    setError(false);
+  }
 
   const fetchIndex = useCallback(async () => {
     try {
       const sdk = getSdk();
-      const results = await sdk.quotes.us(['NDX']);
+      const results = await sdk.quotes.us([symbol]);
       if (!mountedRef.current) return;
 
       const quote = results[0];
@@ -36,12 +44,15 @@ export function useIndexQuote(): UseIndexQuoteResult {
         setLastUpdated(Date.now());
         setError(false);
         setLoading(false);
+      } else {
+        setError(true);
+        setLoading(false);
       }
     } catch {
       if (mountedRef.current) setError(true);
       setLoading(false);
     }
-  }, []);
+  }, [symbol]);
 
   useEffect(() => {
     mountedRef.current = true;

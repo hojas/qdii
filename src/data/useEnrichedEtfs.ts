@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
-import { NASDAQ_100_ETFS } from '@/config/etf.config';
 import { useEtfQuotes } from './useEtfQuotes';
 import { useEtfNav } from './useEtfNav';
-import type { EnrichedEtf } from '@/types/etf';
+import type { EnrichedEtf, EtfStatic } from '@/types/etf';
 
 interface UseEnrichedEtfsResult {
   etfs: readonly EnrichedEtf[];
@@ -12,12 +11,12 @@ interface UseEnrichedEtfsResult {
 }
 
 /** Merge static ETF config with live quotes + NAV, compute derived fields. */
-export function useEnrichedEtfs(): UseEnrichedEtfsResult {
-  const { quotes, loading: quotesLoading, error, lastUpdated } = useEtfQuotes(NASDAQ_100_ETFS);
-  const { navMap, loading: navLoading } = useEtfNav(NASDAQ_100_ETFS);
+export function useEnrichedEtfs(etfs: readonly EtfStatic[]): UseEnrichedEtfsResult {
+  const { quotes, loading: quotesLoading, error, lastUpdated } = useEtfQuotes(etfs);
+  const { navMap, loading: navLoading } = useEtfNav(etfs);
 
-  const etfs: readonly EnrichedEtf[] = useMemo(() => {
-    return NASDAQ_100_ETFS.map((staticData) => {
+  const result: readonly EnrichedEtf[] = useMemo(() => {
+    return etfs.map((staticData) => {
       const live = quotes.get(staticData.code);
 
       // Compute premium/discount rate: (market price - NAV) / NAV × 100
@@ -36,7 +35,7 @@ export function useEnrichedEtfs(): UseEnrichedEtfsResult {
         premiumRate,
       };
     });
-  }, [quotes, navMap]);
+  }, [etfs, quotes, navMap]);
 
-  return { etfs, loading: quotesLoading || navLoading, error, lastUpdated };
+  return { etfs: result, loading: quotesLoading || navLoading, error, lastUpdated };
 }

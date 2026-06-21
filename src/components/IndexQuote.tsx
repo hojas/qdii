@@ -2,8 +2,12 @@ import { useIndexQuote } from '@/data/useIndexQuote';
 import { formatPrice, formatPercent, changeColorClass } from '@/utils/format';
 import { cn } from '@/utils/cn';
 
-export function IndexQuote() {
-  const { data, loading, error } = useIndexQuote();
+type Props = {
+  symbol: string;
+};
+
+export function IndexQuote({ symbol }: Props) {
+  const { data, loading, error } = useIndexQuote(symbol);
 
   if (error) {
     return (

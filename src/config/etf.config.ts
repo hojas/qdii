@@ -1,4 +1,4 @@
-import type { EtfStatic } from '@/types/etf';
+import type { EtfStatic, IndexType } from '@/types/etf';
 
 /**
  * Static metadata for all Chinese A-share listed NASDAQ-100 ETFs.
@@ -115,3 +115,56 @@ export const NASDAQ_100_ETFS: readonly EtfStatic[] = [
     exchange: 'sh',
   },
 ];
+
+/**
+ * Static metadata for all Chinese A-share listed S&P 500 ETFs.
+ * Fund sizes are approximate as of Q1 2026. Management fees are total
+ * (management fee + custodian fee). Data sourced from public fund filings.
+ *
+ * 513500 tracks the S&P 500 Net Total Return index (dividends reinvested net of withholding tax).
+ * Other S&P 500 ETFs track the S&P 500 Price Return index (excludes dividends).
+ */
+export const SP500_ETFS: readonly EtfStatic[] = [
+  {
+    code: '513500',
+    name: '博时标普500ETF',
+
+    managementFee: 0.80,
+    fundSize: 209,
+    inceptionDate: '2013-12-05',
+    exchange: 'sh',
+  },
+  {
+    code: '513650',
+    name: '南方标普500ETF',
+
+    managementFee: 0.75,
+    fundSize: 46,
+    inceptionDate: '2023-03-23',
+    exchange: 'sh',
+  },
+  {
+    code: '159655',
+    name: '华夏标普500ETF',
+
+    managementFee: 0.75,
+    fundSize: 34,
+    inceptionDate: '2022-10-12',
+    exchange: 'sz',
+  },
+  {
+    code: '159612',
+    name: '国泰标普500ETF',
+
+    managementFee: 0.75,
+    fundSize: 7,
+    inceptionDate: '2022-05-09',
+    exchange: 'sz',
+  },
+];
+
+/** Map from index type to its static ETF list */
+export const INDEX_ETF_MAP: Record<IndexType, readonly EtfStatic[]> = {
+  'nasdaq-100': NASDAQ_100_ETFS,
+  sp500: SP500_ETFS,
+};

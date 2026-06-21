@@ -1,3 +1,14 @@
+/** Supported index types */
+export type IndexType = 'nasdaq-100' | 'sp500';
+
+/** Index-level display content for hero section */
+export interface IndexIntro {
+  title: string;
+  subtitle: string;
+  description: string;
+  facts: readonly { label: string; value: string }[];
+}
+
 /** Static metadata for a single ETF (not provided by stock-sdk) */
 export interface EtfStatic {
   /** Trading code, e.g. "513100" (bare, no exchange prefix) */
