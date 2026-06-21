@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { IndexType } from '@/types/etf';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ThemeToggle } from './ThemeToggle';
 import { Footer } from './Footer';
 
 interface LayoutProps {
@@ -24,9 +25,12 @@ export function Layout({ children, activeIndex, onIndexChange }: LayoutProps) {
               <span className="text-[var(--color-border)]">/</span>
               <span>周{weekdayStr} · {dateStr}</span>
             </div>
-            <span className="text-[10px] text-[var(--color-text-muted)] tracking-[0.2em] uppercase font-mono">
-              每日更新
-            </span>
+            <div className="flex items-center gap-4">
+              <ThemeToggle />
+              <span className="text-[10px] text-[var(--color-text-muted)] tracking-[0.2em] uppercase font-mono">
+                每日更新
+              </span>
+            </div>
           </div>
 
           <Tabs
